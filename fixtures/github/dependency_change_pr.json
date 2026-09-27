@@ -1,0 +1,35 @@
+{
+  "pull_request": {
+    "id": 2004,
+    "number": 22,
+    "title": "Bump axios and fastapi",
+    "body": "Dependency updates",
+    "user": { "login": "dan" },
+    "state": "open",
+    "html_url": "https://github.com/acme/widgets/pull/22",
+    "additions": 4,
+    "deletions": 4,
+    "changed_files": 2,
+    "base": { "ref": "main", "repo": { "full_name": "acme/widgets" } },
+    "head": { "ref": "deps/bump", "sha": "4444444444444444444444444444444444444444" }
+  },
+  "commits": [],
+  "files": [
+    {
+      "filename": "package.json",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1,
+      "changes": 2,
+      "patch": "@@ -10,7 +10,7 @@\n-    \"axios\": \"1.6.0\",\n+    \"axios\": \"1.7.9\",\n"
+    },
+    {
+      "filename": "requirements.txt",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1,
+      "changes": 2,
+      "patch": "@@ -1,2 +1,2 @@\n-fastapi==0.110.0\n+fastapi==0.115.0\n"
+    }
+  ]
+}

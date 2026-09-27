@@ -1,0 +1,87 @@
+{
+  "pull_request": {
+    "id": 1001,
+    "number": 1,
+    "title": "Add payment authorization and order service",
+    "body": "Introduces payment auth helpers, order service updates, and dependency bumps for the demo.",
+    "user": { "login": "prism-demo" },
+    "state": "open",
+    "html_url": "https://github.com/prism-demo/sample-repo/pull/1",
+    "created_at": "2026-01-10T12:00:00Z",
+    "updated_at": "2026-01-11T09:30:00Z",
+    "additions": 148,
+    "deletions": 42,
+    "changed_files": 6,
+    "base": {
+      "ref": "main",
+      "repo": { "full_name": "prism-demo/sample-repo" }
+    },
+    "head": {
+      "ref": "feature/payment-auth",
+      "sha": "abc123def4567890abc123def4567890abc123de"
+    }
+  },
+  "repository": {
+    "full_name": "prism-demo/sample-repo"
+  },
+  "commits": [
+    {
+      "sha": "abc123def4567890abc123def4567890abc123de",
+      "commit": {
+        "message": "Add payment auth and order service updates",
+        "author": { "name": "Demo Author", "date": "2026-01-10T12:00:00Z" }
+      },
+      "author": { "login": "prism-demo" }
+    }
+  ],
+  "files": [
+    {
+      "filename": "src/auth/session.py",
+      "status": "modified",
+      "additions": 40,
+      "deletions": 5,
+      "changes": 45,
+      "patch": "@@ -1,5 +1,20 @@\n+import jwt\n+from datetime import datetime, timedelta\n+\n+SECRET = \"demo-only\"\n+\ndef create_session_token(user_id: str) -> str:\n+    payload = {\"sub\": user_id, \"exp\": datetime.utcnow() + timedelta(hours=1)}\n+    return jwt.encode(payload, SECRET, algorithm=\"HS256\")\n+\ndef validate_session_token(token: str) -> dict:\n+    return jwt.decode(token, SECRET, algorithms=[\"HS256\"])\n"
+    },
+    {
+      "filename": "src/payments/service.py",
+      "status": "added",
+      "additions": 55,
+      "deletions": 0,
+      "changes": 55,
+      "patch": "@@ -0,0 +1,55 @@\n+def process_payment(amount: float, method: str, user_id: str) -> dict:\n+    if amount <= 0:\n+        raise ValueError(\"invalid amount\")\n+    if method not in {\"card\", \"wallet\"}:\n+        raise ValueError(\"unsupported method\")\n+    if user_id is None:\n+        raise ValueError(\"missing user\")\n+    status = \"pending\"\n+    if amount > 1000:\n+        status = \"review\"\n+    elif amount > 100:\n+        if method == \"card\":\n+            status = \"authorized\"\n+        else:\n+            status = \"queued\"\n+    else:\n+        status = \"captured\"\n+    if status == \"review\":\n+        if method == \"wallet\":\n+            return {\"status\": status, \"manual\": True}\n+        return {\"status\": status, \"manual\": False}\n+    return {\"status\": status, \"amount\": amount}\n"
+    },
+    {
+      "filename": "src/services/order_service.py",
+      "status": "modified",
+      "additions": 25,
+      "deletions": 10,
+      "changes": 35,
+      "patch": "@@ -1,10 +1,20 @@\n+from src.payments.service import process_payment\n+from src.repositories.order_repository import save_order\n+\ndef create_order(user_id: str, amount: float):\n+    result = process_payment(amount, \"card\", user_id)\n+    return save_order(user_id, amount, result[\"status\"])\n"
+    },
+    {
+      "filename": "src/repositories/order_repository.py",
+      "status": "modified",
+      "additions": 12,
+      "deletions": 2,
+      "changes": 14,
+      "patch": "@@ -1,5 +1,12 @@\n+def save_order(user_id: str, amount: float, status: str) -> dict:\n+    return {\"user_id\": user_id, \"amount\": amount, \"status\": status}\n"
+    },
+    {
+      "filename": "src/api/routes/orders.py",
+      "status": "modified",
+      "additions": 10,
+      "deletions": 5,
+      "changes": 15,
+      "patch": "@@ -1,8 +1,12 @@\n+from src.services.order_service import create_order\n+\ndef post_order(request):\n+    return create_order(request.user_id, request.amount)\n"
+    },
+    {
+      "filename": "requirements.txt",
+      "status": "modified",
+      "additions": 2,
+      "deletions": 1,
+      "changes": 3,
+      "patch": "@@ -1,3 +1,4 @@\n-fastapi==0.110.0\n+fastapi==0.115.0\n+PyJWT==2.9.0\n httpx==0.27.0\n"
+    }
+  ]
+}

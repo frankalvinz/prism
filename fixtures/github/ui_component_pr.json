@@ -1,0 +1,64 @@
+{
+  "pull_request": {
+    "id": 9001,
+    "number": 4,
+    "title": "feat: Implement service area restrictions and waitlist functionality",
+    "body": "Adds unsupported-area UI notice, launch-area constants, and a waitlist API route.",
+    "user": { "login": "frankalvinz" },
+    "state": "open",
+    "html_url": "https://github.com/frankalvinz/nearvo/pull/4",
+    "created_at": "2026-03-01T12:00:00Z",
+    "updated_at": "2026-03-10T09:30:00Z",
+    "additions": 120,
+    "deletions": 10,
+    "changed_files": 3,
+    "base": {
+      "ref": "development",
+      "repo": { "full_name": "frankalvinz/nearvo", "private": true }
+    },
+    "head": {
+      "ref": "Feat-Area-Limitation",
+      "sha": "ui123abcdef4567890ui123abcdef4567890ui12"
+    }
+  },
+  "repository": {
+    "full_name": "frankalvinz/nearvo",
+    "private": true
+  },
+  "commits": [
+    {
+      "sha": "ui123abcdef4567890ui123abcdef4567890ui12",
+      "commit": {
+        "message": "Add service area waitlist UI and API",
+        "author": { "name": "Frank", "date": "2026-03-01T12:00:00Z" }
+      },
+      "author": { "login": "frankalvinz" }
+    }
+  ],
+  "files": [
+    {
+      "filename": "src/components/ui/serviceArea/UnsupportedAreaNotice.tsx",
+      "status": "added",
+      "additions": 40,
+      "deletions": 0,
+      "changes": 40,
+      "patch": "@@ -0,0 +1,40 @@\n+import React from 'react';\n+\n+export function UnsupportedAreaNotice({ area }: { area: string }) {\n+  return (\n+    <div className=\"notice\">\n+      <h2>We don't serve {area} yet</h2>\n+      <p>Join the waitlist and we'll notify you.</p>\n+      <button type=\"button\">Join waitlist</button>\n+    </div>\n+  );\n+}\n"
+    },
+    {
+      "filename": "src/constants/appConstants/launchAreaConstants.ts",
+      "status": "modified",
+      "additions": 15,
+      "deletions": 2,
+      "changes": 17,
+      "patch": "@@ -1,6 +1,12 @@\n export const LAUNCH_AREAS = ['nyc', 'sf'] as const;\n+export const WAITLIST_COPY = 'session starts when we expand';\n+export const AREA_NOTICE = 'Unsupported area';\n"
+    },
+    {
+      "filename": "src/app/api/launch-waitlist/route.ts",
+      "status": "added",
+      "additions": 35,
+      "deletions": 0,
+      "changes": 35,
+      "patch": "@@ -0,0 +1,35 @@\n+import { NextResponse } from 'next/server';\n+\n+export async function POST(request: Request) {\n+  const body = await request.json();\n+  // store waitlist signup\n+  return NextResponse.json({ ok: true, email: body.email });\n+}\n+\n+export async function GET() {\n+  return NextResponse.json({ status: 'ok' });\n+}\n"
+    }
+  ]
+}

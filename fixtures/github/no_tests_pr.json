@@ -1,0 +1,27 @@
+{
+  "pull_request": {
+    "id": 2005,
+    "number": 23,
+    "title": "Refactor billing calculator",
+    "body": "No tests in this PR",
+    "user": { "login": "erin" },
+    "state": "open",
+    "html_url": "https://github.com/acme/widgets/pull/23",
+    "additions": 40,
+    "deletions": 10,
+    "changed_files": 1,
+    "base": { "ref": "main", "repo": { "full_name": "acme/widgets" } },
+    "head": { "ref": "feat/billing", "sha": "5555555555555555555555555555555555555555" }
+  },
+  "commits": [],
+  "files": [
+    {
+      "filename": "src/billing/calculator.py",
+      "status": "modified",
+      "additions": 40,
+      "deletions": 10,
+      "changes": 50,
+      "patch": "@@ -1,5 +1,20 @@\n+def calculate_total(items: list[float], tax: float) -> float:\n+    subtotal = sum(items)\n+    return subtotal * (1 + tax)\n"
+    }
+  ]
+}

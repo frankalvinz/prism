@@ -1,0 +1,35 @@
+{
+  "pull_request": {
+    "id": 2003,
+    "number": 21,
+    "title": "Add users table migration",
+    "body": "Schema change",
+    "user": { "login": "cara" },
+    "state": "open",
+    "html_url": "https://github.com/acme/widgets/pull/21",
+    "additions": 40,
+    "deletions": 0,
+    "changed_files": 2,
+    "base": { "ref": "main", "repo": { "full_name": "acme/widgets" } },
+    "head": { "ref": "db/migrate", "sha": "3333333333333333333333333333333333333333" }
+  },
+  "commits": [],
+  "files": [
+    {
+      "filename": "migrations/20260101_add_users.sql",
+      "status": "added",
+      "additions": 20,
+      "deletions": 0,
+      "changes": 20,
+      "patch": "@@ -0,0 +1,20 @@\n+CREATE TABLE users (\n+  id SERIAL PRIMARY KEY,\n+  email TEXT NOT NULL\n+);\n"
+    },
+    {
+      "filename": "src/models/user.py",
+      "status": "added",
+      "additions": 20,
+      "deletions": 0,
+      "changes": 20,
+      "patch": "@@ -0,0 +1,20 @@\n+class User:\n+    def __init__(self, email: str):\n+        self.email = email\n"
+    }
+  ]
+}

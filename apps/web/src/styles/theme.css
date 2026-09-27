@@ -1,0 +1,115 @@
+/* Brand palette — change primary / secondary here only */
+:root {
+  --brand-primary: #0d9f90;
+  --brand-secondary: #3b7dd8;
+  --brand-primary-foreground: #041014;
+
+  --canvas: #f4f7fb;
+  --panel: #ffffff;
+  --panel-2: #eef2f7;
+  --border: #d5dde8;
+  --muted: #5b6b80;
+  --foreground: #0f1720;
+  --primary: var(--brand-primary);
+  --primary-foreground: var(--brand-primary-foreground);
+  --secondary: var(--brand-secondary);
+  --danger: #d64545;
+  --warn: #c4841d;
+  --ok: #2f9e44;
+  --diff-add-bg: rgba(47, 158, 68, 0.12);
+  --diff-del-bg: rgba(214, 69, 69, 0.12);
+  --body-grad-1: rgba(13, 159, 144, 0.08);
+  --body-grad-2: rgba(59, 125, 216, 0.06);
+  --body-base-start: #f4f7fb;
+  --body-base-end: #e8eef6;
+
+  /* Always-dark stage (logo product shot) */
+  --stage: #05080c;
+  --stage-mark: #0a0e13;
+  --stage-glow-1: rgba(61, 214, 198, 0.18);
+  --stage-glow-2: rgba(110, 168, 254, 0.12);
+
+  /* Logo spectrum rays */
+  --spectrum-blue: #60a5fa;
+  --spectrum-green: #4ade80;
+  --spectrum-yellow: #facc15;
+  --spectrum-red: #f87171;
+
+  /* Chart series (theme-aware) */
+  --chart-1: #0d9f90;
+  --chart-2: #3b7dd8;
+  --chart-3: #c4841d;
+  --chart-4: #d64545;
+  --chart-5: #2f9e44;
+  --chart-6: #7c6bc4;
+  --chart-7: #d97757;
+  --chart-8: #5b6b80;
+}
+
+.dark {
+  --brand-primary: #3dd6c6;
+  --brand-secondary: #6ea8fe;
+  --brand-primary-foreground: #041014;
+
+  --canvas: #0b0f14;
+  --panel: #121820;
+  --panel-2: #18212c;
+  --border: #243041;
+  --muted: #8b9bb0;
+  --foreground: #e8eef7;
+  --primary: var(--brand-primary);
+  --primary-foreground: var(--brand-primary-foreground);
+  --secondary: var(--brand-secondary);
+  --danger: #f07178;
+  --warn: #e6b450;
+  --ok: #7fd962;
+  --diff-add-bg: rgba(127, 217, 98, 0.12);
+  --diff-del-bg: rgba(240, 113, 120, 0.12);
+  --body-grad-1: rgba(61, 214, 198, 0.08);
+  --body-grad-2: rgba(110, 168, 254, 0.07);
+  --body-base-start: #0b0f14;
+  --body-base-end: #0e141c;
+
+  --chart-1: #3dd6c6;
+  --chart-2: #6ea8fe;
+  --chart-3: #e6b450;
+  --chart-4: #f07178;
+  --chart-5: #7fd962;
+  --chart-6: #a78bfa;
+  --chart-7: #fb923c;
+  --chart-8: #8b9bb0;
+}
+
+@theme inline {
+  --font-sans: "IBM Plex Sans", "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", "Cascadia Code", "Consolas", monospace;
+
+  --color-canvas: var(--canvas);
+  --color-panel: var(--panel);
+  --color-panel-2: var(--panel-2);
+  --color-border: var(--border);
+  --color-muted: var(--muted);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-danger: var(--danger);
+  --color-warn: var(--warn);
+  --color-ok: var(--ok);
+  --color-stage: var(--stage);
+  --color-stage-mark: var(--stage-mark);
+  --color-spectrum-blue: var(--spectrum-blue);
+  --color-spectrum-green: var(--spectrum-green);
+  --color-spectrum-yellow: var(--spectrum-yellow);
+  --color-spectrum-red: var(--spectrum-red);
+  --color-diff-add: var(--diff-add-bg);
+  --color-diff-del: var(--diff-del-bg);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-chart-6: var(--chart-6);
+  --color-chart-7: var(--chart-7);
+  --color-chart-8: var(--chart-8);
+}

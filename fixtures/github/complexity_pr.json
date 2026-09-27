@@ -1,0 +1,27 @@
+{
+  "pull_request": {
+    "id": 2006,
+    "number": 24,
+    "title": "Complex payment processor",
+    "body": "High complexity function",
+    "user": { "login": "frank" },
+    "state": "open",
+    "html_url": "https://github.com/acme/widgets/pull/24",
+    "additions": 80,
+    "deletions": 0,
+    "changed_files": 1,
+    "base": { "ref": "main", "repo": { "full_name": "acme/widgets" } },
+    "head": { "ref": "feat/complex", "sha": "6666666666666666666666666666666666666666" }
+  },
+  "commits": [],
+  "files": [
+    {
+      "filename": "src/payment/service.py",
+      "status": "added",
+      "additions": 80,
+      "deletions": 0,
+      "changes": 80,
+      "patch": "@@ -0,0 +1,80 @@\n+def process_payment(amount, method, country, user, flags):\n+    if amount is None:\n+        return None\n+    if amount < 0:\n+        raise ValueError('neg')\n+    if method == 'card':\n+        if country == 'US':\n+            if flags.get('vip'):\n+                if amount > 1000:\n+                    if user.get('verified'):\n+                        return 'fast'\n+                    else:\n+                        return 'manual'\n+                else:\n+                    return 'ok'\n+            else:\n+                if amount > 500:\n+                    return 'review'\n+                return 'ok'\n+        elif country == 'EU':\n+            if amount > 200:\n+                return 'sca'\n+            return 'ok'\n+        else:\n+            return 'intl'\n+    elif method == 'wallet':\n+        if flags.get('blocked'):\n+            return 'deny'\n+        return 'wallet'\n+    else:\n+        return 'unknown'\n"
+    }
+  ]
+}

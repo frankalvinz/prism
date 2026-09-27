@@ -1,0 +1,30 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - AI_ENABLED=false
+      - CORS_ORIGINS=http://localhost:3000,http://127.0.0.1:3000
+      - CACHE_ENABLED=true
+      - PUBLIC_WEB_URL=http://localhost:3000
+      # Optional: GITHUB_TOKEN=${GITHUB_TOKEN}
+      # Optional OAuth for private repos:
+      # - GITHUB_OAUTH_CLIENT_ID=${GITHUB_OAUTH_CLIENT_ID}
+      # - GITHUB_OAUTH_CLIENT_SECRET=${GITHUB_OAUTH_CLIENT_SECRET}
+      # - SESSION_SECRET=${SESSION_SECRET}
+
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+      args:
+        API_ORIGIN: http://api:8000
+    ports:
+      - "3000:3000"
+    environment:
+      - API_ORIGIN=http://api:8000
+    depends_on:
+      - api

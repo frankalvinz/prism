@@ -1,0 +1,35 @@
+{
+  "pull_request": {
+    "id": 2002,
+    "number": 20,
+    "title": "Update login session handling",
+    "body": "Touch authentication paths",
+    "user": { "login": "bob" },
+    "state": "open",
+    "html_url": "https://github.com/acme/widgets/pull/20",
+    "additions": 30,
+    "deletions": 10,
+    "changed_files": 2,
+    "base": { "ref": "main", "repo": { "full_name": "acme/widgets" } },
+    "head": { "ref": "feat/auth", "sha": "2222222222222222222222222222222222222222" }
+  },
+  "commits": [],
+  "files": [
+    {
+      "filename": "src/auth/login.py",
+      "status": "modified",
+      "additions": 20,
+      "deletions": 5,
+      "changes": 25,
+      "patch": "@@ -1,5 +1,15 @@\n+def login(username: str, password: str, session: dict) -> bool:\n+    if not username or not password:\n+        return False\n+    session[\"token\"] = \"demo\"\n+    return True\n"
+    },
+    {
+      "filename": "src/auth/oauth.py",
+      "status": "added",
+      "additions": 10,
+      "deletions": 0,
+      "changes": 10,
+      "patch": "@@ -0,0 +1,10 @@\n+def start_oauth(provider: str) -> str:\n+    return f\"/oauth/{provider}\"\n"
+    }
+  ]
+}
